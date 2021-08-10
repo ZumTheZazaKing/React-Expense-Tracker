@@ -7,15 +7,60 @@ import { MoneyTeller } from './MoneyTeller.js';
 import { TransHistory } from './TransHistory.js';
 import { Input } from './Input.js';
 
-
 function App(){
+
+  let [income, setIncome] = useState(localStorage.getItem("zumthezazaking_expenseTracker_income")||0);
+  let [balance, setBalance] = useState(localStorage.getItem("zumthezazaking_expenseTracker_balance")||0);
+  let [expense, setExpense] = useState(localStorage.getItem("zumthezazaking_expenseTracker_expense")||0);
+
+  let [history, setHistory] = useState(JSON.parse(localStorage.getItem("zumthezazaking_expenseTracker_history"))||[]);
+
+  let [inputTitle, setInputTitle] = useState("");
+  const changeTitle = e => setInputTitle(e.target.value);
+  let [inputAmount, setInputAmount] = useState("");
+  const changeAmount = e => setInputAmount(e.target.value);
+
+  function processTransaction(e){
+    e.preventDefault();
+    setBalance(Number(balance) + Number(inputAmount));
+    localStorage.setItem("zumthezazaking_expenseTracker_balance", Number(balance) + Number(inputAmount));
+
+    if(inputAmount.search(/-/g) !== -1){
+      setExpense(Number(expense) + Number(inputAmount));
+      localStorage.setItem("zumthezazaking_expenseTracker_expense", Number(expense) + Number(inputAmount));
+
+    } else {
+      setIncome(Number(income) + Number(inputAmount));
+      localStorage.setItem("zumthezazaking_expenseTracker_income", Number(income) + Number(inputAmount));
+
+    }
+
+    setHistory([{title: inputTitle, amount:parseFloat(inputAmount).toFixed(2)}, ...history])
+    localStorage.setItem("zumthezazaking_expenseTracker_history", JSON.stringify([{title: inputTitle, amount:parseFloat(inputAmount).toFixed(2)}, ...history]));
+
+    setInputTitle("");
+    setInputAmount("");
+
+  }
+
   return <div>
 
     <h3>Expense Tracker</h3>
 
-    <MoneyTeller/>
-    <TransHistory/>
-    <Input/>
+    <MoneyTeller
+    income={income}
+    balance={balance}
+    expense={expense}/>
+
+    <TransHistory history={history}/>
+
+    <Input
+    inputTitle={inputTitle}
+    inputAmount={inputAmount}
+    changeTitle={changeTitle}
+    changeAmount={changeAmount}
+    processTransaction={processTransaction}/>
+    
   </div>
 }
 
