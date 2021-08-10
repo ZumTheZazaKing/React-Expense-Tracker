@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 import reportWebVitals from './reportWebVitals';
 
+import { MoneyTeller } from './MoneyTeller.js';
+import { TransHistory } from './TransHistory.js';
+import { Input } from './Input.js';
+
+
 function App(){
-  return (<div>
-    <h1>Hello</h1>
-  </div>)
+  return <div>
+
+    <h3>Expense Tracker</h3>
+
+    <MoneyTeller/>
+    <TransHistory/>
+    <Input/>
+  </div>
 }
 
 
