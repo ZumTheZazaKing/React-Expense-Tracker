@@ -73,6 +73,7 @@ body{
         }
 
         .history{
+
             h4{
                 font-family: Arial, Helvetica, sans-serif;
                 margin: 0;
@@ -94,9 +95,13 @@ body{
                     margin: 10px 0 10px 0;
                     border-radius: 5px;
                     font-family: Arial, Helvetica, sans-serif;
+                    word-wrap: break-word;
+                    line-height: 1.5;
+                    font-weight: bold;
 
                     span{
-                        float: right;
+                        font-weight: normal;
+                        font-size: 14px;
                     }
                 }
 
@@ -117,6 +122,7 @@ body{
                 height: 100%;
                 top: 0;
                 left: 0;
+                overflow: auto;
 
                 #historyAllContent{
                     width: 70%;
@@ -127,6 +133,7 @@ body{
                     padding: 10px 20px;
                     border-radius: 5px;
                     transition: .2s ease-in;
+                    margin-bottom: 50px;
 
                     p{
                         text-align: right;

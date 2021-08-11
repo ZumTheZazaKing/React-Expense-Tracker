@@ -24,6 +24,10 @@ function App(){
 
   function processTransaction(e){
     e.preventDefault();
+
+    let currentDateTime = Date().toLocaleString();
+    currentDateTime = currentDateTime.slice(0,currentDateTime.indexOf("G"));
+
     setBalance(Number(balance) + Number(inputAmount));
     localStorage.setItem("zumthezazaking_expenseTracker_balance", Number(balance) + Number(inputAmount));
 
@@ -38,7 +42,7 @@ function App(){
     }
 
     setHistory([{title: inputTitle, amount:parseFloat(inputAmount).toFixed(2)}, ...history])
-    localStorage.setItem("zumthezazaking_expenseTracker_history", JSON.stringify([{title: inputTitle, amount:parseFloat(inputAmount).toFixed(2)}, ...history]));
+    localStorage.setItem("zumthezazaking_expenseTracker_history", JSON.stringify([{title: inputTitle, time:currentDateTime, amount:parseFloat(inputAmount).toFixed(2)}, ...history]));
 
     setInputTitle("");
     setInputAmount("");
