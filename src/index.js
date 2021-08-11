@@ -41,7 +41,7 @@ function App(){
 
     }
 
-    setHistory([{title: inputTitle, amount:parseFloat(inputAmount).toFixed(2)}, ...history])
+    setHistory([{title: inputTitle,time:currentDateTime, amount:parseFloat(inputAmount).toFixed(2)}, ...history])
     localStorage.setItem("zumthezazaking_expenseTracker_history", JSON.stringify([{title: inputTitle, time:currentDateTime, amount:parseFloat(inputAmount).toFixed(2)}, ...history]));
 
     setInputTitle("");
