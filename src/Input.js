@@ -7,8 +7,8 @@ export function Input(props){
             <label>Title:</label><br/>
             <input type="Text" placeholder="No more than 20 words" value={props.inputTitle} maxLength={20} onChange={props.changeTitle} required/>
             <br/><br/>
-            <label>Amount:</label><br/>
-            <input type="number" placeholder="(e.g. 50 - Income, -100 - Expense)" value={props.inputAmount} onChange={props.changeAmount} required/>
+            <label>Amount:<br/>e.g. 50 = Income<br/>e.g. -100 = Expense</label><br/>
+            <input type="number" value={props.inputAmount} onChange={props.changeAmount} required/>
             <br/><br/>
             <input type="submit" value="Add Transaction"/>
         </form>
