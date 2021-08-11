@@ -19,8 +19,11 @@ function App(){
   const changeTitle = e => setInputTitle(e.target.value);
   let [inputAmount, setInputAmount] = useState("");
   const changeAmount = e => setInputAmount(e.target.value);
+  let [currencyUnit, setCurrencyUnit] = useState(localStorage.getItem("zumthezazaking_expenseTracker_currency") || "$");
+  const changeCurrencyUnit = e => setCurrencyUnit(e.target.value);
 
   let historyAllRef = useRef();
+  let settingsMenuRef = useRef();
 
   function processTransaction(e){
     e.preventDefault();
@@ -50,13 +53,25 @@ function App(){
   }
 
   return <div className="container">
+    
+    <div id="settings" onClick={e => settingsMenuRef.current.className=""}><i class="fas fa-cog"></i></div>
+    <div id="settingsMenu" className="hide" ref={settingsMenuRef}>
+      <div id="settingsMenuContent">
+        <form onSubmit={e => {settingsMenuRef.current.className="hide"; e.preventDefault(); localStorage.setItem("zumthezazaking_expenseTracker_currency", currencyUnit)}}>
+          <label>Enter Currency Unit: </label><br/><br/>
+          <input maxLength={3} placeholder="e.g. $, RM..." type="text" value={currencyUnit} onChange={changeCurrencyUnit} required/>
+          <input type="submit" value="Set"/>
+        </form>
+      </div>
+    </div>
 
     <h3>Expense Tracker</h3>
     <br/>
     <MoneyTeller
     income={income}
     balance={balance}
-    expense={expense}/>
+    expense={expense}
+    currencyUnit={currencyUnit}/>
     <br/>
     <TransHistory 
     history={history} 

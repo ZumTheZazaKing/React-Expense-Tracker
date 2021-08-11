@@ -15,6 +15,51 @@ body #root {
   width: 70%;
   margin-bottom: 50px;
 }
+body #settings {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 24px;
+  cursor: pointer;
+}
+body #settingsMenu {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body #settingsMenu #settingsMenuContent {
+  background: white;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  margin-top: 50px;
+  text-align: center;
+  border-radius: 10px;
+}
+body #settingsMenu #settingsMenuContent label {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body #settingsMenu #settingsMenuContent input[type=text] {
+  padding: 10px;
+  border: none;
+  outline: none;
+  background-color: #f7f7f7;
+}
+body #settingsMenu #settingsMenuContent input[type=submit] {
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
 body .container hr {
   height: 5px;
   background: black;
