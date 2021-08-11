@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/React-Expense-Tracker/static/css/main.be40348f.chunk.css",
+    "main.css": "/React-Expense-Tracker/static/css/main.47ebd73c.chunk.css",
     "main.js": "/React-Expense-Tracker/static/js/main.58d8da38.chunk.js",
     "main.js.map": "/React-Expense-Tracker/static/js/main.58d8da38.chunk.js.map",
     "runtime-main.js": "/React-Expense-Tracker/static/js/runtime-main.e5189737.js",
@@ -10,13 +10,13 @@
     "static/js/3.32b36dca.chunk.js": "/React-Expense-Tracker/static/js/3.32b36dca.chunk.js",
     "static/js/3.32b36dca.chunk.js.map": "/React-Expense-Tracker/static/js/3.32b36dca.chunk.js.map",
     "index.html": "/React-Expense-Tracker/index.html",
-    "static/css/main.be40348f.chunk.css.map": "/React-Expense-Tracker/static/css/main.be40348f.chunk.css.map",
+    "static/css/main.47ebd73c.chunk.css.map": "/React-Expense-Tracker/static/css/main.47ebd73c.chunk.css.map",
     "static/js/2.b42b7ff6.chunk.js.LICENSE.txt": "/React-Expense-Tracker/static/js/2.b42b7ff6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e5189737.js",
     "static/js/2.b42b7ff6.chunk.js",
-    "static/css/main.be40348f.chunk.css",
+    "static/css/main.47ebd73c.chunk.css",
     "static/js/main.58d8da38.chunk.js"
   ]
 }
