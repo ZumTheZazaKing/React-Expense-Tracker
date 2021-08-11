@@ -84,6 +84,7 @@ body .container .money .balance {
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.4);
 }
 body .container .money .others {
   display: flex;
@@ -96,6 +97,7 @@ body .container .money .others .income, body .container .money .others .expense 
   flex: 1;
   border-radius: 10px;
   margin: 10px;
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.4);
 }
 body .container .money .others .income {
   color: green;
@@ -126,6 +128,7 @@ body .container .history ul li {
   word-wrap: break-word;
   line-height: 1.5;
   font-weight: bold;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.4);
 }
 body .container .history ul li span {
   font-weight: normal;

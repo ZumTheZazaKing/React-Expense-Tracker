@@ -54,7 +54,7 @@ function App(){
 
   return <div className="container">
     
-    <div id="settings" onClick={e => settingsMenuRef.current.className=""}><i class="fas fa-cog"></i></div>
+    <div id="settings" onClick={e => settingsMenuRef.current.className=""}><i className="fas fa-cog"></i></div>
     <div id="settingsMenu" className="hide" ref={settingsMenuRef}>
       <div id="settingsMenuContent">
         <form onSubmit={e => {settingsMenuRef.current.className="hide"; e.preventDefault(); localStorage.setItem("zumthezazaking_expenseTracker_currency", currencyUnit)}}>
