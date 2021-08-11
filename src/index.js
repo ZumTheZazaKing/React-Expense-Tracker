@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 import reportWebVitals from './reportWebVitals';
@@ -19,6 +19,8 @@ function App(){
   const changeTitle = e => setInputTitle(e.target.value);
   let [inputAmount, setInputAmount] = useState("");
   const changeAmount = e => setInputAmount(e.target.value);
+
+  let historyAllRef = useRef();
 
   function processTransaction(e){
     e.preventDefault();
@@ -52,7 +54,9 @@ function App(){
     balance={balance}
     expense={expense}/>
     <br/>
-    <TransHistory history={history}/>
+    <TransHistory 
+    history={history} 
+    historyAllRef={historyAllRef}/>
     <br/>
     <Input
     inputTitle={inputTitle}

@@ -61,6 +61,11 @@ body .container .history h4 {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
 }
+body .container .history h4 span {
+  font-size: 12px;
+  color: blue;
+  cursor: pointer;
+}
 body .container .history ul {
   list-style: none;
   margin: 0;
@@ -82,6 +87,32 @@ body .container .history ul .income {
 body .container .history ul .expense {
   border-right: 7px solid red;
 }
+body .container .history #historyAll {
+  position: fixed;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+body .container .history #historyAll #historyAllContent {
+  width: 70%;
+  background-color: #dfdfdf;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: 0.2s ease-in;
+}
+body .container .history #historyAll #historyAllContent p {
+  text-align: right;
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
 body .container .input h4 {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -101,6 +132,9 @@ body .container .input input[type=submit] {
   background-color: #0707df;
   color: white;
   border-radius: 5px;
+}
+body .hide {
+  display: none !important;
 }
 
 /*# sourceMappingURL=style.css.map */
