@@ -1,5 +1,106 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background: burlywood;
+  background: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+body #root {
+  width: 70%;
+  margin-bottom: 50px;
+}
+body .container hr {
+  height: 5px;
+  background: black;
+  border: none;
+  outline: none;
+}
+body .container h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  margin: 10px;
+  margin-top: 20px;
+  text-align: center;
+}
+body .container .money p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+body .container .money .balance {
+  text-align: center;
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+}
+body .container .money .others {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+body .container .money .others .income, body .container .money .others .expense {
+  background-color: white;
+  flex: 1;
+  border-radius: 10px;
+  margin: 10px;
+}
+body .container .money .others .income {
+  color: green;
+}
+body .container .money .others .expense {
+  color: red;
+}
+body .container .history h4 {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+body .container .history ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+body .container .history ul li {
+  background: white;
+  padding: 10px;
+  margin: 10px 0 10px 0;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body .container .history ul li span {
+  float: right;
+}
+body .container .history ul .income {
+  border-right: 7px solid green;
+}
+body .container .history ul .expense {
+  border-right: 7px solid red;
+}
+body .container .input h4 {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body .container .input label {
+  font-family: Arial, Helvetica, sans-serif;
+}
+body .container .input input[type=text], body .container .input input[type=number], body .container .input input[type=submit] {
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  outline: none;
+}
+body .container .input input[type=submit] {
+  cursor: pointer;
+  background-color: #0707df;
+  color: white;
+  border-radius: 5px;
 }
 
 /*# sourceMappingURL=style.css.map */

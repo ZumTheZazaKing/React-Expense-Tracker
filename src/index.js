@@ -43,17 +43,17 @@ function App(){
 
   }
 
-  return <div>
+  return <div className="container">
 
     <h3>Expense Tracker</h3>
-
+    <br/>
     <MoneyTeller
     income={income}
     balance={balance}
     expense={expense}/>
-
+    <br/>
     <TransHistory history={history}/>
-
+    <br/>
     <Input
     inputTitle={inputTitle}
     inputAmount={inputAmount}
