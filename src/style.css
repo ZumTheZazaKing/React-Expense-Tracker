@@ -112,6 +112,11 @@ body .container .history #historyAll #historyAllContent {
   transition: 0.2s ease-in;
   margin-bottom: 50px;
 }
+body .container .history #historyAll #historyAllContent h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  margin: 0;
+}
 body .container .history #historyAll #historyAllContent p {
   text-align: right;
   margin: 0;

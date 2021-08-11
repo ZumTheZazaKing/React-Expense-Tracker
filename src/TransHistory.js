@@ -19,6 +19,7 @@ export function TransHistory(props){
         <div id="historyAll" className="hide" ref={props.historyAllRef}>
             <div id="historyAllContent">
                 <p onClick={e => props.historyAllRef.current.className="hide"}>&times;</p>
+                <h2>History</h2>
                 <ul>{historyList}</ul>
             </div>
         </div>
