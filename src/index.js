@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './style.css';
 import reportWebVitals from './reportWebVitals';
 
-
+import { MoneyTeller } from './MoneyTeller.js';
+import { TransHistory } from './TransHistory.js';
+import { Input } from './Input.js';
 
 function App(){
 
