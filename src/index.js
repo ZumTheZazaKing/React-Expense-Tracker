@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react';
+import React, { useState,useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 import reportWebVitals from './reportWebVitals';
@@ -7,20 +7,74 @@ import { MoneyTeller } from './MoneyTeller.js';
 import { TransHistory } from './TransHistory.js';
 import { Input } from './Input.js';
 
-function App(){
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
 
-  let [income, setIncome] = useState(localStorage.getItem("zumthezazaking_expenseTracker_income")||0);
-  let [balance, setBalance] = useState(localStorage.getItem("zumthezazaking_expenseTracker_balance")||0);
-  let [expense, setExpense] = useState(localStorage.getItem("zumthezazaking_expenseTracker_expense")||0);
+import { useAuthState } from 'react-firebase-hooks/auth';
 
-  let [history, setHistory] = useState(JSON.parse(localStorage.getItem("zumthezazaking_expenseTracker_history"))||[]);
+const firebaseConfig = {
+  apiKey: "AIzaSyCQuSLV9BydFHRtg-x9kK9jeM0foZyOt3M",
+  authDomain: "expense-tracker-d9bf2.firebaseapp.com",
+  projectId: "expense-tracker-d9bf2",
+  storageBucket: "expense-tracker-d9bf2.appspot.com",
+  messagingSenderId: "180385147814",
+  appId: "1:180385147814:web:3b0a82f9d205b930eb7d67",
+  measurementId: "G-N4BC1MH8WZ"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const firestore = firebase.firestore();
+
+let mainOn = false;
+
+function Main(){
+  mainOn = true;
+  let [income, setIncome] = useState(0);
+  let [balance, setBalance] = useState(0);
+  let [expense, setExpense] = useState(0);
+
+  let [history, setHistory] = useState([]);
+
+  let [currencyUnit, setCurrencyUnit] = useState("$");
+  const changeCurrencyUnit = e => {setCurrencyUnit(e.target.value);docRef.update({currencyUnit:e.target.value})};
+
+  let docRef = firestore.collection("users").doc(auth.currentUser.uid);
+
+  function setValues(data){
+    setBalance(data.balance);
+    setIncome(data.income);
+    setExpense(data.expense);
+    setHistory(data.history);
+    setCurrencyUnit(data.currencyUnit);
+  }
+
+  useEffect(() => {
+    docRef.get().then(doc => {
+      if(doc.exists){
+        docRef.get().then(data => setValues(data.data()));
+      } else {
+        docRef.set({
+          balance:0,
+          income:0,
+          expense:0,
+          currencyUnit:"$",
+          history:[]
+        })
+        docRef.get().then(data => setValues(data.data()));
+      }
+    })
+  },[mainOn])
+
+
 
   let [inputTitle, setInputTitle] = useState("");
   const changeTitle = e => setInputTitle(e.target.value);
   let [inputAmount, setInputAmount] = useState("");
   const changeAmount = e => setInputAmount(e.target.value);
-  let [currencyUnit, setCurrencyUnit] = useState(localStorage.getItem("zumthezazaking_expenseTracker_currency") || "$");
-  const changeCurrencyUnit = e => setCurrencyUnit(e.target.value);
+
 
   let historyAllRef = useRef();
   let settingsMenuRef = useRef();
@@ -32,20 +86,20 @@ function App(){
     currentDateTime = currentDateTime.slice(0,currentDateTime.indexOf("G"));
 
     setBalance(Number(balance) + Number(inputAmount));
-    localStorage.setItem("zumthezazaking_expenseTracker_balance", Number(balance) + Number(inputAmount));
+    docRef.update({balance:Number(balance) + Number(inputAmount)});
 
     if(inputAmount.search(/-/g) !== -1){
       setExpense(Number(expense) + Number(inputAmount));
-      localStorage.setItem("zumthezazaking_expenseTracker_expense", Number(expense) + Number(inputAmount));
+      docRef.update({expense:Number(expense) + Number(inputAmount)});;
 
     } else {
       setIncome(Number(income) + Number(inputAmount));
-      localStorage.setItem("zumthezazaking_expenseTracker_income", Number(income) + Number(inputAmount));
+      docRef.update({income:Number(income) + Number(inputAmount)});
 
     }
 
-    setHistory([{title: inputTitle,time:currentDateTime, amount:parseFloat(inputAmount).toFixed(2)}, ...history])
-    localStorage.setItem("zumthezazaking_expenseTracker_history", JSON.stringify([{title: inputTitle, time:currentDateTime, amount:parseFloat(inputAmount).toFixed(2)}, ...history]));
+    setHistory([{title: inputTitle,time:currentDateTime, amount:parseFloat(inputAmount).toFixed(2)}, ...history]);
+    docRef.update({history:[{title: inputTitle,time:currentDateTime, amount:parseFloat(inputAmount).toFixed(2)}, ...history]})
 
     setInputTitle("");
     setInputAmount("");
@@ -57,15 +111,17 @@ function App(){
     <div id="settings" onClick={e => settingsMenuRef.current.className=""}><i className="fas fa-cog"></i></div>
     <div id="settingsMenu" className="hide" ref={settingsMenuRef}>
       <div id="settingsMenuContent">
-        <form onSubmit={e => {settingsMenuRef.current.className="hide"; e.preventDefault(); localStorage.setItem("zumthezazaking_expenseTracker_currency", currencyUnit)}}>
+        <p onClick={e => settingsMenuRef.current.className="hide"}>&times;</p>
+        <form onSubmit={e => {e.preventDefault();}}>
           <label>Enter Currency Unit: </label><br/><br/>
           <input maxLength={3} placeholder="e.g. $, RM..." type="text" value={currencyUnit} onChange={changeCurrencyUnit} required/>
-          <input type="submit" value="Set"/>
         </form>
+        <br/>
+        <SignOut/>
       </div>
     </div>
 
-    <h3>Expense Tracker</h3>
+    <h3>Hello, {auth.currentUser.displayName}</h3>
     <br/>
     <MoneyTeller
     income={income}
@@ -86,6 +142,36 @@ function App(){
     
   </div>
 }
+
+function SignIn(){
+
+  const signInWithGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider);
+  }
+
+  return <div id="signIn">
+    <h2>Expense Tracker</h2>
+    <p>Track your expenses, transactions and more with this user-friendly app</p>
+    <button onClick={signInWithGoogle}>Sign In With Google</button>
+    </div>
+}
+
+function SignOut(){
+  return auth.currentUser && (
+    <button id="signOut" onClick={() => auth.signOut()}>Sign Out</button>
+  )
+}
+
+function App(){
+
+  const [user] = useAuthState(auth);
+
+  return <div>
+    {user ? <Main/> : <SignIn/>}
+  </div>
+}
+
 
 
 const el = <App/>;
